@@ -1,0 +1,14 @@
+{% extends "app/base.html" %}
+{% block content %}
+    {% if error %}
+        não foi possível
+    {% else %}
+        <p>O CPF {{ cpf }} é 
+            {% if validador == False %}
+                não válido!
+            {% else %}
+                válido!
+            {% endif %}  
+        </p>
+    {% endif %}  
+{% endblock content %}
