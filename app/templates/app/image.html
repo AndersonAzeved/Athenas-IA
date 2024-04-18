@@ -1,7 +1,7 @@
 {% extends "app/base.html" %}
 {% block content %}
-    {% if error %}
-        não foi possível
+    {% if error == True %}
+        <p>não foi possível</p>
     {% else %}
         <p>O CPF {{ cpf }} é 
             {% if validador == False %}

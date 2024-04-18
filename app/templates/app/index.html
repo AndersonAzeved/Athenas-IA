@@ -1,10 +1,23 @@
 {% extends "app/base.html" %}
 {% block content %}
-    <p>Adicione a imagem</p>
-
-    <form action="{% url 'new_image'  %}" method="post" enctype="multipart/form-data">
+    
+    <form action="{% url 'index'  %}" method="post" enctype="multipart/form-data">
+        <p>Adicione a imagem</p>
         {% csrf_token %}
         {{ form.as_p}}
         <button name="submit">Adicionar</button>
     </form>
+
+    {% if error == True %}
+        <p>não foi possível identificar o cpf</p>
+    {% elif cpf %}
+    
+        <p>O CPF {{ cpf }}
+            {% if validador == False %}
+                não é válido!
+            {% else %}
+                é válido!
+            {% endif %}  
+        </p>
+    {% endif %}  
 {% endblock content %}

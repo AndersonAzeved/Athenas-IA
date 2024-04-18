@@ -9,26 +9,18 @@ def index(request):
         if form.is_valid():
             form.save()
             urlImage = Image.objects.last().image
-            
             cpf = pegarCpfImagem(str(urlImage))
-            validador = validaCpf(cpf)
-            return render(request, 'app/image.html', {'cpf':cpf, 'validador':validador})
+            if len(cpf) == 0:
+                return render(request, 'app/index.html', {'error':True})
+            else:
+                validador = validaCpf(cpf[0])
+            return render(request, 'app/index.html', {'cpf':cpf[0], 'validador':validador})
     else:
         form = FormImage()
         return render(request, 'app/index.html', {'form':form})
 
 def new_image(request):
-    if request.method == 'POST':
-        form = FormImage(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            urlImage = Image.objects.last().image
-            cpf = pegarCpfImagem(str(urlImage))
-            validador = validaCpf(cpf)
-            return render(request, 'app/image.html', {'cpf':cpf, 'validador':validador})
-    else:
-        form = FormImage()
-        return render(request, 'app/image.html', {'form':form})
+    return render(request, 'app/image.html')
     
 def teste_image(request):
     return render(request, 'app/image.html')
